@@ -24,7 +24,6 @@ jobs:
         with:
           node-version: '20'
           architecture: x64
-
       - name: Git checkout for source code analysis
         uses: actions/checkout@v4
 
