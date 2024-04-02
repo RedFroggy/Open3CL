@@ -16,6 +16,11 @@ jobs:
     name: Release
     runs-on: ubuntu-20.04
     steps:
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          architecture: x64
       - name: Git checkout for source code analysis
         uses: actions/checkout@v4
 
