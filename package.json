@@ -1,6 +1,6 @@
 {
   "name": "@jzck/open3cl",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Open Source 3CL-DPE engine",
   "main": "index.js",
   "author": "Jack Halford",
