@@ -13,12 +13,6 @@ jobs:
     name: Release
     runs-on: ubuntu-20.04
     steps:
-      - name: Generate token
-        id: generate_token
-        uses: tibdex/github-app-token@v2
-        with:
-          app_id: ${{ secrets.BOT_APP_ID }}
-          private_key: ${{ secrets.BOT_PRIVATE_KEY }}
       - name: Git checkout for source code analysis
         uses: actions/checkout@v4
 
