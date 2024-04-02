@@ -5,7 +5,11 @@ permissions:
   pull-requests: write
 on:
   workflow_call:
-
+    secrets:
+      BOT_APP_ID:
+        required: true
+      BOT_PRIVATE_KEY:
+        required: true
 jobs:
   release:
     name: Release
