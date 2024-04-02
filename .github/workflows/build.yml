@@ -42,10 +42,10 @@ jobs:
         run: |
           npm run test
 
-#  release:
-#    uses: RedFroggy/Open3CL/.github/workflows/release.yml@main
-#    secrets:
-#      GH_TOKEN: ${{ secrets.GH_TOKEN }}
-#      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#    needs: build
-
+  release:
+    uses: RedFroggy/Open3CL/.github/workflows/release.yml@main
+    if: github.ref == 'refs/heads/main'
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    needs: build
