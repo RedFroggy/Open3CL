@@ -6,20 +6,13 @@ permissions:
 on:
   workflow_call:
     secrets:
-      BOT_APP_ID:
-        required: true
-      BOT_PRIVATE_KEY:
+      GH_NPM_TOKEN:
         required: true
 jobs:
   release:
     name: Release
     runs-on: ubuntu-20.04
     steps:
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          architecture: x64
       - name: Generate token
         id: generate_token
         uses: tibdex/github-app-token@v2
@@ -41,6 +34,6 @@ jobs:
 
       - name: release
         env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.GH_NPM_TOKEN }}
         run: npm run release -- --r git+https://github.com/RedFroggy/Open3CL.git
