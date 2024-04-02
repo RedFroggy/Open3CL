@@ -46,5 +46,6 @@ jobs:
     uses: RedFroggy/Open3CL/.github/workflows/release.yml@main
     if: github.ref == 'refs/heads/main'
     secrets:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
+      BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
     needs: build
