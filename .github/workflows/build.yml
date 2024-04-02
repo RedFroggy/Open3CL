@@ -47,5 +47,4 @@ jobs:
     if: github.ref == 'refs/heads/main'
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     needs: build
