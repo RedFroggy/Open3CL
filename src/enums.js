@@ -1,3 +1,6 @@
+/**
+ * @type {TableEnum}
+ */
 const enums = {
   version: {
     1: 'version du 1er juillet 2021',
@@ -1143,6 +1146,6 @@ const enums = {
     2: 'moyen',
     3: 'bon'
   }
-}
+};
 
-export default enums
+export default enums;
