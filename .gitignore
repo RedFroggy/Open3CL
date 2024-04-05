@@ -4,3 +4,6 @@ bun.lockb
 /.idea/
 /node_modules/
 /duplicate/
+*.iml
+scripts/assets/enums.js
+scripts/assets/tv.js
