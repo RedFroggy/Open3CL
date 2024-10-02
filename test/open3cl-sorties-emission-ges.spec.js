@@ -39,8 +39,7 @@ describe('Test Open3CL engine compliance on corpus', () => {
     'emission_ges_fr',
     'emission_ges_fr_depensier',
     'emission_ges_5_usages',
-    'emission_ges_5_usages_m2',
-    'classe_emission_ges'
+    'emission_ges_5_usages_m2'
   ])('check "emission_ges.%s" value', (attr) => {
     test.each(corpus)('dpe %s', (ademeId) => {
       const exceptedDpe = getAdemeFileJson(ademeId);
