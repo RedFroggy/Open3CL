@@ -1,6 +1,9 @@
 import { tvs as tv } from '../../tv-v2.js';
 import { Log } from '../../core/util/logger/log-service.js';
 
+/**
+ * Accès aux données des tables de valeurs
+ */
 export class TvStore {
   /**
    * Coefficients U des portes

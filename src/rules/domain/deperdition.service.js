@@ -2,14 +2,17 @@ import { TvStore } from '../../data/infrastructure/tv.store.js';
 import enums from '../../enums.js';
 import { Log } from '../../core/util/logger/log-service.js';
 
+/**
+ * Calcul des déperditions de l’enveloppe GV
+ * @see Méthode de calcul 3CL-DPE 2021 (cotobre 2021) chapitre 3
+ */
 export class DeperditionService {
   /**
-   * @param d {{enumTypeAdjacenceId?: string
-   *         surfaceAiu?: number,
-   *         surfaceAue?: number,
-   *         enumCfgIsolationLncId?: string,
-   *         zoneClimatiqueId?: string}}
-   * @return {number|undefined}
+   * Détermination du coefficient de réduction des déperditions b
+   * @see Méthode de calcul 3CL-DPE 2021 (cotobre 2021) chapitre 3.1
+   *
+   * @param d {DeperditionData}
+   * @return {number|undefined} Retourne le coefficient de réduction des déperditions b ou undefined si le calcul est impossible
    */
   static b(d) {
     let uVue,
