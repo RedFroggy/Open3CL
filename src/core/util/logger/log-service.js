@@ -17,7 +17,8 @@ export class Log {
    */
   static debug(message, detail = undefined) {
     if (Log.isLogged('debug')) {
-      console.debug(`[DEBUG] ${message}`, detail);
+      const msg = `[DEBUG] ${message}`;
+      detail ? console.debug(msg, detail) : console.debug(msg);
     }
   }
 
@@ -37,7 +38,8 @@ export class Log {
    */
   static info(message, detail = undefined) {
     if (Log.isLogged('info')) {
-      console.info(`[INFO] ${message}`, detail);
+      const msg = `[INFO] ${message}`;
+      detail ? console.info(msg, detail) : console.info(msg);
     }
   }
 
@@ -47,7 +49,8 @@ export class Log {
    */
   static warn(message, detail = undefined) {
     if (Log.isLogged('warn')) {
-      console.warn(`[WARN] ${message}`, detail);
+      const msg = `[WARN] ${message}`;
+      detail ? console.warn(msg, detail) : console.warn(msg);
     }
   }
 
@@ -57,7 +60,8 @@ export class Log {
    */
   static error(message, detail = undefined) {
     if (Log.isLogged('error')) {
-      console.error(`[ERROR] ${message}`, detail);
+      const msg = `[ERROR] ${message}`;
+      detail ? console.error(msg, detail) : console.error(msg);
     }
   }
 
