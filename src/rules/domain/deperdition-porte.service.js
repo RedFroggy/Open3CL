@@ -26,20 +26,20 @@ export class DeperditionPorteService {
 
     // @todo : Une porte vitrée avec plus de 60% de vitrage est traitée comme une porte-fenêtre avec soubassement.
 
-    if (['2', '3'].includes(porteDE.enumMethodeSaisieUporteId)) {
+    if (['2', '3'].includes(porteDE.enum_methode_saisie_uporte_id)) {
       // valeur justifiée saisie à partir des documents justificatifs autorisés
       // saisie direct U depuis RSET/RSEE( etude RT2012/RE2020)
-      di.uporte = porteDE.uporteSaisi;
+      di.uporte = porteDE.uporte_saisi;
     } else {
       // valeur forfaitaire
-      di.uporte = TvStore.getUPorte(porteDE.enumTypePorteId);
+      di.uporte = TvStore.getUPorte(porteDE.enum_type_porte_id);
     }
 
     di.b = DeperditionService.b({
-      enumTypeAdjacenceId: porteDE.enumTypeAdjacenceId,
-      surfaceAiu: porteDE.surfaceAiu,
-      surfaceAue: porteDE.surfaceAue,
-      enumCfgIsolationLncId: porteDE.enumCfgIsolationLncId,
+      enumTypeAdjacenceId: porteDE.enum_type_adjacence_id,
+      surfaceAiu: porteDE.surface_aiu,
+      surfaceAue: porteDE.surface_aue,
+      enumCfgIsolationLncId: porteDE.enum_cfg_isolation_lnc_id,
       zoneClimatiqueId: ctx.zoneClimatiqueId
     });
 
