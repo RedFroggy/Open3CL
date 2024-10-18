@@ -69,6 +69,10 @@ export class SynchronizeValeurTables {
                 if (value.endsWith('kW')) {
                   return value.replace(/kW/g, '').replace(/\s/g, '');
                 }
+                // Transform range to number
+                if (['aiu_aue_min', 'aiu_aue_max'].includes(key)) {
+                  return value?.replace(/[ <≤]/g, '').replace(',', '.');
+                }
               }
 
               // By default, the Excel parsing ignore property with 0 value,
