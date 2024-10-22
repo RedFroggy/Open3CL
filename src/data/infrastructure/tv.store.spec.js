@@ -176,6 +176,93 @@ describe('Lecture des tables de valeurs', () => {
     );
   });
 
+  /**
+   *
+   *   periode_construction: {
+   *     1: 'avant 1948',
+   *     2: '1948-1974',
+   *     3: '1975-1977',
+   *     4: '1978-1982',
+   *     5: '1983-1988',
+   *     6: '1989-2000',
+   *     7: '2001-2005',
+   *     8: '2006-2012',
+   *     9: '2013-2021',
+   *     10: 'après 2021'
+   *   },
+   * @type {*|string}
+   */
+  /**
+   *
+   *   zone_climatique: {
+   *     1: 'h1a',
+   *     2: 'h1b',
+   *     3: 'h1c',
+   *     4: 'h2a',
+   *     5: 'h2b',
+   *     6: 'h2c',
+   *     7: 'h2d',
+   *     8: 'h3'
+   *   },
+   */
+
+  describe('lecture des valeurs de umur', () => {
+    test.each([
+      {
+        label: 'mur année de construction avant 1948 zone climatique h1a',
+        enumPeriodeConstructionId: '1',
+        enumZoneClimatiqueId: '1',
+        expected: 2.5
+      },
+      {
+        label: 'mur année de construction 1983-1988 zone climatique h1a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '1',
+        expected: 0.8
+      },
+      {
+        label: 'mur année de construction 1983-1988 zone climatique h2a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '4',
+        expected: 0.84
+      },
+      {
+        label: 'mur année de construction 1983-1988 zone climatique h3',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '8',
+        effetJoule: false,
+        expected: 0.89
+      },
+      {
+        label: 'mur année de construction 1983-1988 zone climatique h1a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '1',
+        effetJoule: true,
+        expected: 0.7
+      },
+      {
+        label: 'mur année de construction 1983-1988 zone climatique h2a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '4',
+        effetJoule: true,
+        expected: 0.74
+      },
+      {
+        label: 'mur année de construction 1983-1988 zone climatique h3',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '8',
+        effetJoule: true,
+        expected: 0.78
+      }
+    ])(
+      'umur pour $label',
+      ({ enumPeriodeConstructionId, enumZoneClimatiqueId, effetJoule, expected }) => {
+        const umur = TvStore.getUmur(enumPeriodeConstructionId, enumZoneClimatiqueId, effetJoule);
+        expect(umur).toBe(expected);
+      }
+    );
+  });
+
   describe('Benchmark b', () => {
     test('reworked', () => {
       for (let i = 0; i < 1000; i++) {

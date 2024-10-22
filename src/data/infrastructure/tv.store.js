@@ -93,17 +93,7 @@ export class TvStore {
    * @param epaisseurStructure {number|undefined}
    * @return {number|undefined}
    */
-  static getUmur0(enumMateriauxStructureMurId, epaisseurStructure) {
-    /**
-     *
-     *     {
-     *       tv_umur0_id: '33',
-     *       enum_materiaux_structure_mur_id: '5',
-     *       materiaux_structure_mur: 'Murs en pan de bois sans remplissage tout venant',
-     *       epaisseur_structure: '13',
-     *       umur0: '2.35'
-     *     },
-     */
+  static getUmur0(enumMateriauxStructureMurId, epaisseurStructure = undefined) {
     const umur0 = tv['umur0']
       .filter((v) => v.enum_materiaux_structure_mur_id === enumMateriauxStructureMurId)
       .find(
@@ -123,5 +113,33 @@ export class TvStore {
 
     Log.debug(`umur0 pour enumMateriauxStructureMurId ${enumMateriauxStructureMurId} = ${umur0}`);
     return parseFloat(umur0);
+  }
+
+  /**
+   * Coefficient de transmission thermique du mur
+   * @param enumPeriodeConstructionId {string}
+   * @param enumZoneClimatiqueId {string}
+   * @param effetJoule {boolean}
+   * @return {number|undefined}
+   */
+  static getUmur(enumPeriodeConstructionId, enumZoneClimatiqueId, effetJoule = false) {
+    const umur = tv['umur'].find(
+      (v) =>
+        v.enum_periode_construction_id.split('|').includes(enumPeriodeConstructionId) &&
+        v.enum_zone_climatique_id.split('|').includes(enumZoneClimatiqueId) &&
+        effetJoule === (parseInt(v.effet_joule) === 1)
+    )?.umur;
+
+    if (!umur) {
+      Log.error(
+        `Pas de valeur forfaitaire umur pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}`
+      );
+      return;
+    }
+
+    Log.debug(
+      `umur pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId} = ${umur}`
+    );
+    return parseFloat(umur);
   }
 }
