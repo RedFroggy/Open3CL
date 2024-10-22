@@ -70,8 +70,8 @@ export class SynchronizeValeurTables {
                   return value.replace(/kW/g, '').replace(/\s/g, '');
                 }
                 // Transform range to number
-                if (['aiu_aue_min', 'aiu_aue_max'].includes(key)) {
-                  return value?.replace(/[ <≤]/g, '').replace(',', '.');
+                if (['aiu_aue_min', 'aiu_aue_max', 'epaisseur_structure'].includes(key)) {
+                  return value?.replace(/[ <≤≥>]/g, '').replace(',', '.');
                 }
               }
 

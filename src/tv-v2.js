@@ -3089,7 +3089,7 @@ export const tvs = {
       tv_umur0_id: '2',
       enum_materiaux_structure_mur_id: '2',
       materiaux_structure_mur: "Murs en pierre de taille et moellons constitué d'un seul matériaux",
-      epaisseur_structure: '≤ 20',
+      epaisseur_structure: '20',
       umur0: '3.2'
     },
     {
@@ -3173,7 +3173,7 @@ export const tvs = {
       tv_umur0_id: '14',
       enum_materiaux_structure_mur_id: '2',
       materiaux_structure_mur: "Murs en pierre de taille et moellons constitué d'un seul matériaux",
-      epaisseur_structure: '≥ 80',
+      epaisseur_structure: '80',
       umur0: '1.5'
     },
     {
@@ -3222,14 +3222,14 @@ export const tvs = {
       tv_umur0_id: '21',
       enum_materiaux_structure_mur_id: '3',
       materiaux_structure_mur: 'Murs en pierre de taille et moellons avec remplissage tout venant',
-      epaisseur_structure: '≥ 80',
+      epaisseur_structure: '80',
       umur0: '1.25'
     },
     {
       tv_umur0_id: '22',
       enum_materiaux_structure_mur_id: '4',
       materiaux_structure_mur: "Murs en pisé ou béton de terre stabilisé (à partir d'argile crue)",
-      epaisseur_structure: '≤ 40',
+      epaisseur_structure: '40',
       umur0: '1.75'
     },
     {
@@ -3285,14 +3285,14 @@ export const tvs = {
       tv_umur0_id: '30',
       enum_materiaux_structure_mur_id: '4',
       materiaux_structure_mur: "Murs en pisé ou béton de terre stabilisé (à partir d'argile crue)",
-      epaisseur_structure: '≥ 80',
+      epaisseur_structure: '80',
       umur0: '1.1'
     },
     {
       tv_umur0_id: '31',
       enum_materiaux_structure_mur_id: '5',
       materiaux_structure_mur: 'Murs en pan de bois sans remplissage tout venant',
-      epaisseur_structure: '≤ 8',
+      epaisseur_structure: '8',
       umur0: '3'
     },
     {
@@ -3327,7 +3327,7 @@ export const tvs = {
       tv_umur0_id: '36',
       enum_materiaux_structure_mur_id: '5',
       materiaux_structure_mur: 'Murs en pan de bois sans remplissage tout venant',
-      epaisseur_structure: '≥ 32',
+      epaisseur_structure: '32',
       umur0: '1.35'
     },
     {
@@ -3340,7 +3340,7 @@ export const tvs = {
       tv_umur0_id: '38',
       enum_materiaux_structure_mur_id: '7',
       materiaux_structure_mur: 'Murs bois (rondin)',
-      epaisseur_structure: '≤ 10',
+      epaisseur_structure: '10',
       umur0: '1.6'
     },
     {
@@ -3361,14 +3361,14 @@ export const tvs = {
       tv_umur0_id: '41',
       enum_materiaux_structure_mur_id: '7',
       materiaux_structure_mur: 'Murs bois (rondin)',
-      epaisseur_structure: '≥ 25',
+      epaisseur_structure: '25',
       umur0: '0.8'
     },
     {
       tv_umur0_id: '42',
       enum_materiaux_structure_mur_id: '8',
       materiaux_structure_mur: 'Murs en briques pleines simples',
-      epaisseur_structure: '≤ 9',
+      epaisseur_structure: '9',
       umur0: '3.9'
     },
     {
@@ -3438,14 +3438,14 @@ export const tvs = {
       tv_umur0_id: '52',
       enum_materiaux_structure_mur_id: '8',
       materiaux_structure_mur: 'Murs en briques pleines simples',
-      epaisseur_structure: '≥ 70',
+      epaisseur_structure: '70',
       umur0: '1.2'
     },
     {
       tv_umur0_id: '53',
       enum_materiaux_structure_mur_id: '9',
       materiaux_structure_mur: "Murs en briques pleines doubles avec lame d'air",
-      epaisseur_structure: '≤ 20',
+      epaisseur_structure: '20',
       umur0: '2'
     },
     {
@@ -3487,14 +3487,14 @@ export const tvs = {
       tv_umur0_id: '59',
       enum_materiaux_structure_mur_id: '9',
       materiaux_structure_mur: "Murs en briques pleines doubles avec lame d'air",
-      epaisseur_structure: '≥ 60',
+      epaisseur_structure: '60',
       umur0: '1.2'
     },
     {
       tv_umur0_id: '60',
       enum_materiaux_structure_mur_id: '10',
       materiaux_structure_mur: 'Murs en briques creuses',
-      epaisseur_structure: '≤ 15',
+      epaisseur_structure: '15',
       umur0: '2.15'
     },
     {
@@ -3550,14 +3550,14 @@ export const tvs = {
       tv_umur0_id: '68',
       enum_materiaux_structure_mur_id: '10',
       materiaux_structure_mur: 'Murs en briques creuses',
-      epaisseur_structure: '≥ 43',
+      epaisseur_structure: '43',
       umur0: '1.4'
     },
     {
       tv_umur0_id: '69',
       enum_materiaux_structure_mur_id: '11',
       materiaux_structure_mur: 'Murs en blocs de béton pleins',
-      epaisseur_structure: '≤ 20',
+      epaisseur_structure: '20',
       umur0: '2.9'
     },
     {
@@ -3613,14 +3613,14 @@ export const tvs = {
       tv_umur0_id: '77',
       enum_materiaux_structure_mur_id: '11',
       materiaux_structure_mur: 'Murs en blocs de béton pleins',
-      epaisseur_structure: '≥ 40',
+      epaisseur_structure: '40',
       umur0: '2.05'
     },
     {
       tv_umur0_id: '78',
       enum_materiaux_structure_mur_id: '12',
       materiaux_structure_mur: 'Murs en blocs de béton creux',
-      epaisseur_structure: '≤ 20',
+      epaisseur_structure: '20',
       umur0: '2.8'
     },
     {
@@ -3634,14 +3634,14 @@ export const tvs = {
       tv_umur0_id: '80',
       enum_materiaux_structure_mur_id: '12',
       materiaux_structure_mur: 'Murs en blocs de béton creux',
-      epaisseur_structure: '≥ 25',
+      epaisseur_structure: '25',
       umur0: '2.3'
     },
     {
       tv_umur0_id: '81',
       enum_materiaux_structure_mur_id: '13',
       materiaux_structure_mur: 'Murs en béton banché',
-      epaisseur_structure: '≤ 20',
+      epaisseur_structure: '20',
       umur0: '2.9'
     },
     {
@@ -3690,14 +3690,14 @@ export const tvs = {
       tv_umur0_id: '88',
       enum_materiaux_structure_mur_id: '13',
       materiaux_structure_mur: 'Murs en béton banché',
-      epaisseur_structure: '≥ 45',
+      epaisseur_structure: '45',
       umur0: '1.9'
     },
     {
       tv_umur0_id: '89',
       enum_materiaux_structure_mur_id: '14',
       materiaux_structure_mur: 'Murs en béton de mâchefer',
-      epaisseur_structure: '≤ 20',
+      epaisseur_structure: '20',
       umur0: '2.75'
     },
     {
@@ -3949,14 +3949,14 @@ export const tvs = {
       tv_umur0_id: '125',
       enum_materiaux_structure_mur_id: '18',
       materiaux_structure_mur: 'Murs en ossature bois avec isolant en remplissage ≥ 2006',
-      epaisseur_structure: '≥ 45',
+      epaisseur_structure: '45',
       umur0: '0.11'
     },
     {
       tv_umur0_id: '126',
       enum_materiaux_structure_mur_id: '19',
       materiaux_structure_mur: 'Murs sandwich béton/isolant/béton (sans isolation rapportée)',
-      epaisseur_structure: '≤15',
+      epaisseur_structure: '15',
       umur0: '0.9'
     },
     {
@@ -3970,7 +3970,7 @@ export const tvs = {
       tv_umur0_id: '128',
       enum_materiaux_structure_mur_id: '19',
       materiaux_structure_mur: 'Murs sandwich béton/isolant/béton (sans isolation rapportée)',
-      epaisseur_structure: '≥ 25',
+      epaisseur_structure: '25',
       umur0: '0.45'
     },
     {
@@ -4032,14 +4032,14 @@ export const tvs = {
       tv_umur0_id: '137',
       enum_materiaux_structure_mur_id: '24',
       materiaux_structure_mur: 'Murs en ossature bois avec isolant en remplissage 2001-2005',
-      epaisseur_structure: '≥ 45',
+      epaisseur_structure: '45',
       umur0: '0.13'
     },
     {
       tv_umur0_id: '138',
       enum_materiaux_structure_mur_id: '25',
       materiaux_structure_mur: 'Murs en ossature bois sans remplissage',
-      epaisseur_structure: '≤ 8',
+      epaisseur_structure: '8',
       umur0: '3'
     },
     {
@@ -4074,7 +4074,7 @@ export const tvs = {
       tv_umur0_id: '143',
       enum_materiaux_structure_mur_id: '25',
       materiaux_structure_mur: 'Murs en ossature bois sans remplissage',
-      epaisseur_structure: '≥ 32',
+      epaisseur_structure: '32',
       umur0: '1.35'
     },
     {
@@ -4130,14 +4130,14 @@ export const tvs = {
       tv_umur0_id: '151',
       enum_materiaux_structure_mur_id: '26',
       materiaux_structure_mur: 'Murs en ossature bois avec isolant en remplissage <2001',
-      epaisseur_structure: '≥ 45',
+      epaisseur_structure: '45',
       umur0: '0.16'
     },
     {
       tv_umur0_id: '152',
       enum_materiaux_structure_mur_id: '27',
       materiaux_structure_mur: 'Murs en ossature bois avec remplissage tout venant',
-      epaisseur_structure: '≤ 8',
+      epaisseur_structure: '8',
       umur0: '1.7'
     },
     {
@@ -4172,7 +4172,7 @@ export const tvs = {
       tv_umur0_id: '157',
       enum_materiaux_structure_mur_id: '27',
       materiaux_structure_mur: 'Murs en ossature bois avec remplissage tout venant',
-      epaisseur_structure: '≥ 32',
+      epaisseur_structure: '32',
       umur0: '1.7'
     }
   ],
