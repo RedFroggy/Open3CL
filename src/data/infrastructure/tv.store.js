@@ -3,6 +3,8 @@ import { Log } from '../../core/util/logger/log-service.js';
 
 /**
  * Accès aux données des tables de valeurs
+ *
+ * /!\ Les tableaux des valeurs doivent souvent être ordonnés (ex: epaisseur_structure pour umur0)
  */
 export class TvStore {
   /**
@@ -83,5 +85,43 @@ export class TvStore {
 
     Log.debug(`uvue pour enumTypeAdjacenceId ${enumTypeAdjacenceId} = ${uvue}`);
     return parseFloat(uvue);
+  }
+
+  /**
+   * Coefficient de transmission thermique du mur non isolé
+   * @param enumMateriauxStructureMurId {string}
+   * @param epaisseurStructure {number|undefined}
+   * @return {number|undefined}
+   */
+  static getUmur0(enumMateriauxStructureMurId, epaisseurStructure) {
+    /**
+     *
+     *     {
+     *       tv_umur0_id: '33',
+     *       enum_materiaux_structure_mur_id: '5',
+     *       materiaux_structure_mur: 'Murs en pan de bois sans remplissage tout venant',
+     *       epaisseur_structure: '13',
+     *       umur0: '2.35'
+     *     },
+     */
+    const umur0 = tv['umur0']
+      .filter((v) => v.enum_materiaux_structure_mur_id === enumMateriauxStructureMurId)
+      .find(
+        (v, idx, items) =>
+          !v.epaisseur_structure ||
+          !epaisseurStructure ||
+          !items[idx + 1] ||
+          epaisseurStructure < parseFloat(items[idx + 1].epaisseur_structure)
+      )?.umur0;
+
+    if (!umur0) {
+      Log.error(
+        `Pas de valeur forfaitaire umur0 pour enumMateriauxStructureMurId:${enumMateriauxStructureMurId}`
+      );
+      return;
+    }
+
+    Log.debug(`umur0 pour enumMateriauxStructureMurId ${enumMateriauxStructureMurId} = ${umur0}`);
+    return parseFloat(umur0);
   }
 }

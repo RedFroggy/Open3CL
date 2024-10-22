@@ -128,6 +128,54 @@ describe('Lecture des tables de valeurs', () => {
     });
   });
 
+  describe('lecture des valeurs de umur0', () => {
+    test.each([
+      { label: 'mur inconnu', enumMateriauxStructureMurId: '1', expected: 2.5 },
+      {
+        label: "Murs en pierre de taille et moellons constitué d'un seul matériaux 18cm",
+        enumMateriauxStructureMurId: '2',
+        epaisseurStructure: 18,
+        expected: 3.2
+      },
+      {
+        label: "Murs en pierre de taille et moellons constitué d'un seul matériaux 37cm",
+        enumMateriauxStructureMurId: '2',
+        epaisseurStructure: 37,
+        expected: 2.45
+      },
+      {
+        label: "Murs en pierre de taille et moellons constitué d'un seul matériaux 30cm",
+        enumMateriauxStructureMurId: '2',
+        epaisseurStructure: 30,
+        expected: 2.65
+      },
+      {
+        label: "Murs en pierre de taille et moellons constitué d'un seul matériaux 39cm",
+        enumMateriauxStructureMurId: '2',
+        epaisseurStructure: 39,
+        expected: 2.45
+      },
+      {
+        label: "Murs en pierre de taille et moellons constitué d'un seul matériaux 98cm",
+        enumMateriauxStructureMurId: '2',
+        epaisseurStructure: 98,
+        expected: 1.5
+      },
+      {
+        label: 'Murs en pan de bois sans remplissage tout venant',
+        enumMateriauxStructureMurId: '5',
+        epaisseurStructure: 12,
+        expected: 2.7
+      }
+    ])(
+      'umur pour $label (id:$enumMateriauxStructureMurId)',
+      ({ enumMateriauxStructureMurId, epaisseurStructure, expected }) => {
+        const umur0 = TvStore.getUmur0(enumMateriauxStructureMurId, epaisseurStructure);
+        expect(umur0).toBe(expected);
+      }
+    );
+  });
+
   describe('Benchmark b', () => {
     test('reworked', () => {
       for (let i = 0; i < 1000; i++) {
