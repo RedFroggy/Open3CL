@@ -2,7 +2,7 @@
   
   <numero_dpe>2387E1211986H</numero_dpe>
   <statut>ACTIF</statut>
-<administratif>
+  <administratif>
     <dpe_a_remplacer xsi:nil="true"></dpe_a_remplacer>
     <reference_interne_projet>TARVER23/IMO/2612</reference_interne_projet>
     <motif_remplacement></motif_remplacement>

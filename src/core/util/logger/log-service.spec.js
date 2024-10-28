@@ -8,11 +8,11 @@ describe('Log service unit tests', () => {
   let infoSpy = jest.spyOn(console, 'info');
 
   beforeEach(() => {
-    debugSpy.mockReset();
-    infoSpy.mockReset();
-    warnSpy.mockReset();
-    errorSpy.mockReset();
     process.env.LOG_LEVEL = null;
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
   });
 
   it('should write debug on console', () => {
@@ -48,16 +48,67 @@ describe('Log service unit tests', () => {
     });
   });
 
-  it('should write on console with correct log level', () => {
+  it('should write on console with correct log level : debug', () => {
+    process.env.LOG_LEVEL = 'debug';
+
+    Log.debug('A message');
+    expect(debugSpy).toHaveBeenCalled();
+
+    Log.info('A message');
+    expect(infoSpy).toHaveBeenCalled();
+
+    Log.warn('A message');
+    expect(warnSpy).toHaveBeenCalled();
+
+    Log.error('A message');
+    expect(errorSpy).toHaveBeenCalled();
+  });
+
+  it('should write on console with correct log level : info', () => {
     process.env.LOG_LEVEL = 'info';
 
     Log.debug('A message');
     expect(debugSpy).not.toHaveBeenCalled();
 
-    Log.error('A message');
-    expect(errorSpy).toHaveBeenCalled();
-
     Log.info('A message');
     expect(infoSpy).toHaveBeenCalled();
+
+    Log.warn('A message');
+    expect(warnSpy).toHaveBeenCalled();
+
+    Log.error('A message');
+    expect(errorSpy).toHaveBeenCalled();
+  });
+
+  it('should write on console with correct log level : warn', () => {
+    process.env.LOG_LEVEL = 'warn';
+
+    Log.debug('A message');
+    expect(debugSpy).not.toHaveBeenCalled();
+
+    Log.info('A message');
+    expect(infoSpy).not.toHaveBeenCalled();
+
+    Log.warn('A message');
+    expect(warnSpy).toHaveBeenCalled();
+
+    Log.error('A message');
+    expect(errorSpy).toHaveBeenCalled();
+  });
+
+  it('should write on console with correct log level : error', () => {
+    process.env.LOG_LEVEL = 'error';
+
+    Log.debug('A message');
+    expect(debugSpy).not.toHaveBeenCalled();
+
+    Log.info('A message');
+    expect(infoSpy).not.toHaveBeenCalled();
+
+    Log.warn('A message');
+    expect(warnSpy).not.toHaveBeenCalled();
+
+    Log.error('A message');
+    expect(errorSpy).toHaveBeenCalled();
   });
 });

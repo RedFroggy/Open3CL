@@ -1,7 +1,12 @@
 import { jest } from '@jest/globals';
-import { Log } from '../../core/util/logger/log-service.js';
+import { Log } from '../../../core/util/logger/log-service.js';
 import { DeperditionService } from './deperdition.service.js';
-import b from '../../3.1_b.js';
+import b from '../../../3.1_b.js';
+import corpus from '../../../../test/corpus-sano.json';
+import { getAdemeFileJson, removeDIAndResult } from '../../../../test/test-helpers.js';
+import { DpeNormalizerService } from '../../normalizer/domain/dpe-normalizer.service.js';
+import { ContexteBuilder } from './contexte.builder.js';
+import { DeperditionMurService } from './deperdition-mur.service.js';
 
 describe('Calcul des déperditions', () => {
   /** @type {Contexte} */
@@ -206,6 +211,30 @@ describe('Calcul des déperditions', () => {
         b(di, de, du, zc);
         expect(di.b).toBe(0.9);
       }
+    });
+  });
+
+  describe("Test d'intégration de calcul des deperditions", () => {
+    test.each(corpus)('deperditions pour dpe %s', (ademeId) => {
+      let e = false;
+      let dpeRequest = getAdemeFileJson(ademeId);
+      dpeRequest = DpeNormalizerService.normalize(dpeRequest);
+
+      /** @type {Contexte} */
+      const ctx = ContexteBuilder.fromDpe(dpeRequest);
+      /** @type {Enveloppe} */
+      const enveloppe = dpeRequest.logement.enveloppe;
+      /** @type {Deperdition} */
+      const deperditions = DeperditionService.gv(ctx, enveloppe);
+
+      expect(deperditions.deperdition_mur).toBeCloseTo(
+        dpeRequest.logement.sortie.deperdition.deperdition_mur,
+        2
+      );
+      expect(deperditions.deperdition_porte).toBeCloseTo(
+        dpeRequest.logement.sortie.deperdition.deperdition_porte,
+        2
+      );
     });
   });
 });

@@ -1,4 +1,5 @@
 import { FileStore } from './file.store.js';
+import { jest } from '@jest/globals';
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -18,8 +19,8 @@ describe('FileStore unit tests', () => {
   it('should be able to read and parse local ods file', () => {
     const fileStore = new FileStore();
 
-    return fileStore.readLocalOdsFileAndConvertToJson('file.ods').then((output) => {
-      expect(output).toEqual({ Sheet1: [] });
+    return fileStore.readLocalOdsFileAndConvertToJson('./test/fixtures/file.ods').then((output) => {
+      expect(output).toEqual({ Feuille1: [] });
     });
   });
 

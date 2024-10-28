@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals';
-import { Log } from '../../core/util/logger/log-service.js';
+import { Log } from '../../../core/util/logger/log-service.js';
 import { TvStore } from './tv.store.js';
-import { tv } from '../../utils.js';
+import { tv } from '../../../utils.js';
 
 describe('Lecture des tables de valeurs', () => {
   beforeAll(() => {
@@ -174,37 +174,12 @@ describe('Lecture des tables de valeurs', () => {
         expect(umur0).toBe(expected);
       }
     );
-  });
 
-  /**
-   *
-   *   periode_construction: {
-   *     1: 'avant 1948',
-   *     2: '1948-1974',
-   *     3: '1975-1977',
-   *     4: '1978-1982',
-   *     5: '1983-1988',
-   *     6: '1989-2000',
-   *     7: '2001-2005',
-   *     8: '2006-2012',
-   *     9: '2013-2021',
-   *     10: 'après 2021'
-   *   },
-   * @type {*|string}
-   */
-  /**
-   *
-   *   zone_climatique: {
-   *     1: 'h1a',
-   *     2: 'h1b',
-   *     3: 'h1c',
-   *     4: 'h2a',
-   *     5: 'h2b',
-   *     6: 'h2c',
-   *     7: 'h2d',
-   *     8: 'h3'
-   *   },
-   */
+    test('pas de valeur de umur0', () => {
+      const umur0 = TvStore.getUmur0('0');
+      expect(umur0).toBeUndefined();
+    });
+  });
 
   describe('lecture des valeurs de umur', () => {
     test.each([
@@ -261,6 +236,11 @@ describe('Lecture des tables de valeurs', () => {
         expect(umur).toBe(expected);
       }
     );
+
+    test('pas de valeur de umur', () => {
+      const umur = TvStore.getUmur('0', '1', true);
+      expect(umur).toBeUndefined();
+    });
   });
 
   describe('Benchmark b', () => {

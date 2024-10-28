@@ -4,6 +4,7 @@ import { ApplicationConfig } from '../../conf/infrastructure/application.config.
 import { SynchronizeC1Tables } from './synchronize-c1-tables.js';
 import { SynchronizeSolicitationsTables } from './synchronize-solicitations-tables.js';
 import { ValeurTablesFixture } from '../../../../test/fixtures/core/assets/valeur-tables.fixture.js';
+import { jest } from '@jest/globals';
 
 describe('SynchronizeValeurTables unit tests', () => {
   it('should download, parse and convert valeur_tables.xlsx file', () => {

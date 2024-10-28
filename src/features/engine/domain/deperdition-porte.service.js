@@ -1,4 +1,4 @@
-import { TvStore } from '../../data/infrastructure/tv.store.js';
+import { TvStore } from '../../dpe/infrastructure/tv.store.js';
 import { DeperditionService } from './deperdition.service.js';
 
 /**

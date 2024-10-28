@@ -1,8 +1,8 @@
 import { DeperditionPorteService } from './deperdition-porte.service.js';
 import { jest } from '@jest/globals';
-import { Log } from '../../core/util/logger/log-service.js';
-import corpus from '../../../test/corpus.json';
-import { getAdemeFileJson } from '../../../test/test-helpers.js';
+import { Log } from '../../../core/util/logger/log-service.js';
+import corpus from '../../../../test/corpus.json';
+import { getAdemeFileJson } from '../../../../test/test-helpers.js';
 
 describe('Calcul de déperdition des portes', () => {
   beforeAll(() => {

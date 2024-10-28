@@ -70,6 +70,9 @@ export class Log {
    * @return true if this level should be logged
    */
   static isLogged(level) {
-    return Log.levelOrder.indexOf(level) || 0 >= Log.levelOrder.indexOf(process.env.LOG_LEVEL) || 0;
+    return (
+      !process.env.LOG_LEVEL ||
+      Log.levelOrder.indexOf(process.env.LOG_LEVEL) <= Log.levelOrder.indexOf(level)
+    );
   }
 }

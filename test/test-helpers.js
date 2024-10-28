@@ -65,3 +65,46 @@ export function getResultFile(ademeId) {
   const data = fs.readFileSync(dpeResultFile, { encoding: 'utf8', flag: 'r' });
   return JSON.parse(data);
 }
+
+export function removeDIAndResult(dpe) {
+  delete dpe.logement.sortie;
+  delete dpe.logement.enveloppe.inertie;
+
+  dpe.logement.enveloppe.mur_collection.mur?.map((m) => delete m.donnee_intermediaire);
+  dpe.logement.enveloppe.baie_vitree_collection.baie_vitree?.map((m) => {
+    delete m.baie_vitree_double_fenetre?.donnee_intermediaire;
+    delete m.donnee_intermediaire;
+  });
+  dpe.logement.enveloppe.ets_collection.ets?.map((m) => {
+    delete m.donnee_intermediaire;
+  });
+  dpe.logement.enveloppe.plancher_bas_collection.plancher_bas?.map(
+    (m) => delete m.donnee_intermediaire
+  );
+  dpe.logement.enveloppe.plancher_haut_collection.plancher_haut?.map(
+    (m) => delete m.donnee_intermediaire
+  );
+  dpe.logement.enveloppe.pont_thermique_collection.pont_thermique?.map(
+    (m) => delete m.donnee_intermediaire
+  );
+  dpe.logement.enveloppe.porte_collection.porte?.map((m) => delete m.donnee_intermediaire);
+  dpe.logement.climatisation_collection.climatisation?.map((m) => delete m.donnee_intermediaire);
+  dpe.logement.ventilation_collection.ventilation?.map((m) => delete m.donnee_intermediaire);
+  dpe.logement.ventilation_collection.ventilation?.map((m) => delete m.donnee_intermediaire);
+  dpe.logement.installation_ecs_collection.installation_ecs?.map((m) => {
+    m.generateur_ecs_collection.generateur_ecs?.map((n) => {
+      delete n.donnee_intermediaire;
+    });
+    delete m.donnee_intermediaire;
+  });
+  dpe.logement.installation_chauffage_collection.installation_chauffage?.map((m) => {
+    m.emetteur_chauffage_collection.emetteur_chauffage?.map((n) => {
+      delete n.donnee_intermediaire;
+    });
+    m.generateur_chauffage_collection.generateur_chauffage?.map((n) => {
+      delete n.donnee_intermediaire;
+    });
+    delete m.donnee_intermediaire;
+  });
+  delete dpe.logement.production_elec_enr?.donnee_intermediaire;
+}
