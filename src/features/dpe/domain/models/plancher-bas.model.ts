@@ -7,16 +7,16 @@ export interface PlancherBasDE {
   description?: string;
   reference?: string;
   reference_lnc?: string;
-  tv_coef_reduction_deperdition_id?: number; // TV
+  tv_coef_reduction_deperdition_id?: string; // TV
   surface_aiu?: number;
   surface_aue?: number;
-  enum_cfg_isolation_lnc_id?: number; // ENUM cfg_isolation_lnc
-  enum_type_adjacence_id?: number; // ENUM type_adjacence
+  enum_cfg_isolation_lnc_id?: string; // ENUM cfg_isolation_lnc
+  enum_type_adjacence_id?: string; // ENUM type_adjacence
   surface_paroi_opaque?: number;
   upb0_saisi?: number;
-  tv_upb0_id?: number; // TV
-  enum_type_plancher_bas_id?: number; // ENUM type_plancher_bas
-  enum_methode_saisie_u0_id?: number; // ENUM methode_saisie_u0
+  tv_upb0_id?: string; // TV
+  enum_type_plancher_bas_id?: string; // ENUM type_plancher_bas
+  enum_methode_saisie_u0_id?: string; // ENUM methode_saisie_u0
   upb_saisi?: number;
   enum_type_isolation_id?: string; // ENUM type_isolation
   enum_periode_isolation_id?: string; // ENUM periode_isolation
@@ -24,7 +24,7 @@ export interface PlancherBasDE {
   epaisseur_isolation?: number;
   tv_upb_id?: string; // TV
   enum_methode_saisie_u_id?: string; // ENUM methode_saisie_u
-  calcul_ue: boolean;
+  calcul_ue: number;
   perimetre_ue?: number;
   surface_ue?: number;
   ue?: number;

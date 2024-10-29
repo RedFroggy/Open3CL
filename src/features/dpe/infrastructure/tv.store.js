@@ -142,4 +142,105 @@ export class TvStore {
     );
     return parseFloat(umur);
   }
+
+  /**
+   * Coefficient de transmission thermique du plancher bas
+   * @param enumTypePlancherBasId {string}
+   * @return {number|undefined}
+   */
+  static getUpb0(enumTypePlancherBasId) {
+    const upbO = tv['upb0'].find(
+      (v) => v.enum_type_plancher_bas_id === enumTypePlancherBasId
+    )?.upb0;
+
+    if (!upbO) {
+      Log.error(
+        `Pas de valeur forfaitaire upbO pour enumTypePlancherBasId:${enumTypePlancherBasId}`
+      );
+      return;
+    }
+
+    Log.debug(`upbO pour enumTypePlancherBasId ${enumTypePlancherBasId} = ${upbO}`);
+    return parseFloat(upbO);
+  }
+
+  /**
+   * Coefficient de transmission thermique du plancher bas
+   * @param enumPeriodeConstructionId {string}
+   * @param enumZoneClimatiqueId {string}
+   * @param effetJoule {boolean}
+   * @return {number|undefined}
+   */
+  static getUpb(enumPeriodeConstructionId, enumZoneClimatiqueId, effetJoule = false) {
+    const upb = tv['upb'].find(
+      (v) =>
+        v.enum_periode_construction_id.split('|').includes(enumPeriodeConstructionId) &&
+        v.enum_zone_climatique_id.split('|').includes(enumZoneClimatiqueId) &&
+        effetJoule === (parseInt(v.effet_joule) === 1)
+    )?.upb;
+
+    if (!upb) {
+      Log.error(
+        `Pas de valeur forfaitaire upb pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}`
+      );
+      return;
+    }
+
+    Log.debug(
+      `upb pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId} = ${upb}`
+    );
+    return parseFloat(upb);
+  }
+
+  /**
+   * Retourne la valeur UE la plus proche
+   * @param enumTypeAdjacenceId {string}
+   * @param enumPeriodeConstructionId {string}
+   * @param dsp {number} Valeur entière la plus proche de 2S/P
+   * @param upb {number} Valeur de upb
+   * @return {number|undefined}
+   */
+  static getUeByUpd(enumTypeAdjacenceId, enumPeriodeConstructionId, dsp, upb) {
+    const ueRange =
+      tv['ue'].filter(
+        (v) =>
+          parseInt(v['2s_p']) === dsp &&
+          v.enum_type_adjacence_id.split('|').includes(enumTypeAdjacenceId) &&
+          v.enum_periode_construction_id.split('|').includes(enumPeriodeConstructionId)
+      ) || [];
+    let ue;
+
+    // Rechercher les valeurs les plus proches
+    for (let idx = 0; idx < ueRange.length; idx++) {
+      const u = ueRange[idx];
+      if (parseFloat(u.upb) === upb) {
+        ue = parseFloat(u.ue);
+        break;
+      }
+      if (parseFloat(u.upb) < upb && idx > 0) {
+        const maxUe = ueRange[idx - 1];
+        const minUe = u;
+        ue =
+          Math.round(
+            (parseFloat(minUe.ue) +
+              ((parseFloat(maxUe.ue) - parseFloat(minUe.ue)) * (upb - parseFloat(minUe.upb))) /
+                (parseFloat(maxUe.upb) - parseFloat(minUe.upb))) *
+              100
+          ) / 100;
+        break;
+      }
+    }
+
+    if (!ue) {
+      Log.error(
+        `Pas de valeur forfaitaire ue pour enumTypeAdjacenceId:${enumTypeAdjacenceId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}, 2S/P:${dsp}`
+      );
+      return;
+    }
+
+    Log.debug(
+      `ue pour enumTypeAdjacenceId:${enumTypeAdjacenceId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}, 2S/P:${dsp} = ${ue}`
+    );
+    return parseFloat(ue);
+  }
 }

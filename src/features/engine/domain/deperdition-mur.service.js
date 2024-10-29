@@ -41,16 +41,10 @@ export class DeperditionMurService {
     // On determine umur_nu (soit umur0 soit 2.5 comme valeur minimale forfaitaire)
     const umurNu = Math.min(umur0, 2.5);
 
-    /**
-     * Si Année d'isolation connue alors on prend cette données.
-     * Sinon
-     *   Si Année de construction ≤74 alors Année d’isolation = 75-77
-     *   Sinon Année d’isolation = Année de construction
-     * @type {string}
-     */
-    const enumPeriodeIsolationId =
-      murDE.enum_periode_isolation_id ||
-      Math.max(parseInt(ctx.enumPeriodeConstructionId), 3).toString();
+    const enumPeriodeIsolationId = DeperditionService.getEnumPeriodeIsolationId(
+      murDE.enum_periode_isolation_id,
+      ctx
+    );
 
     // Selon l'isolation, on applique un calcul au mur nu pour simuler son isolation
     let umur;

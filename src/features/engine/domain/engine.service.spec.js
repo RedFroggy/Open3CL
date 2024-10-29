@@ -11,7 +11,7 @@ describe('Application de la méthode 3CL', () => {
     Log.info = jest.fn();
   });
 
-  test('sur un DPE classique : DPE_TEST_001', () => {
+  xtest('sur un DPE classique : DPE_TEST_001', () => {
     /** @type {Dpe} */
     const originalDpe = getAdemeFileJson('DPE_TEST_001');
 

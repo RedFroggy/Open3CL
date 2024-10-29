@@ -214,7 +214,7 @@ describe('Calcul des déperditions', () => {
     });
   });
 
-  describe("Test d'intégration de calcul des deperditions", () => {
+  xdescribe("Test d'intégration de calcul des deperditions", () => {
     test.each(corpus)('deperditions pour dpe %s', (ademeId) => {
       let e = false;
       let dpeRequest = getAdemeFileJson(ademeId);

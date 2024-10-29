@@ -87,4 +87,20 @@ export class DeperditionService {
 
     return deperditions;
   }
+
+  /**
+   * Si Année d'isolation connue alors on prend cette donnée.
+   * Sinon
+   *   Si Année de construction ≤74 alors Année d’isolation = 75-77
+   *   Sinon Année d’isolation = Année de construction
+   *
+   * @param enumPeriodeIsolationId {number}
+   * @param ctx {Contexte}
+   * @return {string} ID de la période d'isolation
+   */
+  static getEnumPeriodeIsolationId(enumPeriodeIsolationId, ctx) {
+    return (
+      enumPeriodeIsolationId || Math.max(parseInt(ctx.enumPeriodeConstructionId), 3).toString()
+    );
+  }
 }

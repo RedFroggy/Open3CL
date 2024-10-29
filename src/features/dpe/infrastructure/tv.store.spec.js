@@ -243,6 +243,136 @@ describe('Lecture des tables de valeurs', () => {
     });
   });
 
+  describe('lecture des valeurs de upb0', () => {
+    test.each([
+      { enumTypePlancherBasId: '1', expected: 2 },
+      { enumTypePlancherBasId: '2', expected: 1.45 },
+      { enumTypePlancherBasId: '3', expected: 1.45 },
+      { enumTypePlancherBasId: '4', expected: 1.1 },
+      { enumTypePlancherBasId: '5', expected: 1.6 },
+      { enumTypePlancherBasId: '6', expected: 1.1 },
+      { enumTypePlancherBasId: '7', expected: 1.75 },
+      { enumTypePlancherBasId: '8', expected: 0.8 },
+      { enumTypePlancherBasId: '9', expected: 2 },
+      { enumTypePlancherBasId: '10', expected: 1.6 },
+      { enumTypePlancherBasId: '11', expected: 2 },
+      { enumTypePlancherBasId: '12', expected: 0.45 }
+    ])(
+      'upb0 pour type plancher bas $enumTypePlancherBasId',
+      ({ enumTypePlancherBasId, expected }) => {
+        const upb0 = TvStore.getUpb0(enumTypePlancherBasId);
+        expect(upb0).toBe(expected);
+      }
+    );
+
+    test('pas de valeur de upb0', () => {
+      const upb0 = TvStore.getUpb0('0');
+      expect(upb0).toBeUndefined();
+    });
+  });
+
+  describe('lecture des valeurs de upb', () => {
+    test.each([
+      {
+        label: 'pb année de construction avant 1948 zone climatique h1a',
+        enumPeriodeConstructionId: '1',
+        enumZoneClimatiqueId: '1',
+        expected: 2
+      },
+      {
+        label: 'pb année de construction 1983-1988 zone climatique h1a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '1',
+        expected: 0.8
+      },
+      {
+        label: 'pb année de construction 1983-1988 zone climatique h2a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '4',
+        expected: 0.74
+      },
+      {
+        label: 'pb année de construction 1983-1988 zone climatique h3',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '8',
+        effetJoule: false,
+        expected: 0.89
+      },
+      {
+        label: 'pb année de construction 1983-1988 zone climatique h1a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '1',
+        effetJoule: true,
+        expected: 0.55
+      },
+      {
+        label: 'pb année de construction 1983-1988 zone climatique h2a',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '4',
+        effetJoule: true,
+        expected: 0.58
+      },
+      {
+        label: 'pb année de construction 1983-1988 zone climatique h3',
+        enumPeriodeConstructionId: '5',
+        enumZoneClimatiqueId: '8',
+        effetJoule: true,
+        expected: 0.78
+      }
+    ])(
+      'upb pour $label',
+      ({ enumPeriodeConstructionId, enumZoneClimatiqueId, effetJoule, expected }) => {
+        const upb = TvStore.getUpb(enumPeriodeConstructionId, enumZoneClimatiqueId, effetJoule);
+        expect(upb).toBe(expected);
+      }
+    );
+
+    test('pas de valeur de upb', () => {
+      const upb = TvStore.getUpb('0', '1', true);
+      expect(upb).toBeUndefined();
+    });
+  });
+
+  describe('lecture des valeurs de ue par upb', () => {
+    test.each([
+      {
+        label: 'ue non extrapolé',
+        enumTypeAdjacenceId: '3',
+        enumPeriodeConstructionId: '1',
+        dsp: 4,
+        upb: 3.33,
+        expected: 0.43
+      },
+      {
+        label: 'ue extrapolé',
+        enumTypeAdjacenceId: '3',
+        enumPeriodeConstructionId: '1',
+        dsp: 4,
+        upb: 3,
+        expected: 0.42
+      },
+      {
+        label: 'ue extrapolé',
+        enumTypeAdjacenceId: '3',
+        enumPeriodeConstructionId: '1',
+        dsp: 4,
+        upb: 3,
+        expected: 0.42
+      }
+    ])(
+      'ue pour $label',
+      ({ enumTypeAdjacenceId, enumPeriodeConstructionId, dsp, upb, expected }) => {
+        const ue = TvStore.getUeByUpd(enumTypeAdjacenceId, enumPeriodeConstructionId, dsp, upb);
+        expect(ue).toBe(expected);
+      }
+    );
+
+    test('pas de valeur de ue', () => {
+      const ue = TvStore.getUeByUpd('0', '1', 0, 0);
+      expect(ue).toBeUndefined();
+    });
+  });
+
   describe('Benchmark b', () => {
     test('reworked', () => {
       for (let i = 0; i < 1000; i++) {
