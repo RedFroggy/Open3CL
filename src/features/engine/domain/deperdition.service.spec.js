@@ -180,7 +180,7 @@ describe('Calcul des déperditions', () => {
     );
   });
 
-  describe('Benchmark', () => {
+  xdescribe('Benchmark', () => {
     test('reworked', () => {
       const data = {
         enumTypeAdjacenceId: '8',

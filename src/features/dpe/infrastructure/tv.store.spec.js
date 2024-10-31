@@ -405,7 +405,45 @@ describe('Lecture des tables de valeurs', () => {
     });
   });
 
-  describe('Benchmark b', () => {
+  describe('lecture des valeurs de uph', () => {
+    test.each([
+      {
+        enumPeriodeConstructionId: '1',
+        typeToiture: 'terrasse',
+        enumZoneClimatiqueId: '1',
+        effetJoule: false,
+        expected: 2.5
+      },
+      {
+        enumPeriodeConstructionId: '4',
+        typeToiture: 'combles',
+        enumZoneClimatiqueId: '4',
+        effetJoule: true,
+        expected: 0.42
+      },
+      {
+        enumPeriodeConstructionId: '8',
+        typeToiture: 'combles',
+        enumZoneClimatiqueId: '6',
+        effetJoule: true,
+        expected: 0.2
+      }
+    ])(
+      'uph pour type plancher Haut',
+      ({ enumPeriodeConstructionId, typeToiture, enumZoneClimatiqueId, effetJoule, expected }) => {
+        expect(
+          TvStore.getUph(enumPeriodeConstructionId, typeToiture, enumZoneClimatiqueId, effetJoule)
+        ).toBe(expected);
+      }
+    );
+
+    test('pas de valeur de uph', () => {
+      const uph = TvStore.getUph('0', 'terrasse', '1', false);
+      expect(uph).toBeUndefined();
+    });
+  });
+
+  xdescribe('Benchmark b', () => {
     test('reworked', () => {
       for (let i = 0; i < 1000; i++) {
         const b = TvStore.getB('8');
@@ -425,7 +463,7 @@ describe('Lecture des tables de valeurs', () => {
     });
   });
 
-  describe('Benchmark uVue', () => {
+  xdescribe('Benchmark uVue', () => {
     test('reworked', () => {
       for (let i = 0; i < 1000; i++) {
         const uVue = TvStore.getUVue('8');

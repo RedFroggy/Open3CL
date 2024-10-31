@@ -2,16 +2,18 @@ import { jest } from '@jest/globals';
 import { Log } from './log-service.js';
 
 describe('Log service unit tests', () => {
-  let errorSpy = jest.spyOn(console, 'error');
-  let debugSpy = jest.spyOn(console, 'debug');
-  let warnSpy = jest.spyOn(console, 'warn');
-  let infoSpy = jest.spyOn(console, 'info');
+  let errorSpy, debugSpy, warnSpy, infoSpy;
 
   beforeEach(() => {
     process.env.LOG_LEVEL = null;
+    errorSpy = jest.spyOn(console, 'error');
+    debugSpy = jest.spyOn(console, 'debug');
+    warnSpy = jest.spyOn(console, 'warn');
+    infoSpy = jest.spyOn(console, 'info');
   });
 
   afterEach(() => {
+    jest.restoreAllMocks();
     jest.resetAllMocks();
   });
 

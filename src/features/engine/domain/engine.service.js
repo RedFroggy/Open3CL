@@ -108,5 +108,7 @@ export class EngineService {
       delete m.donnee_intermediaire;
     });
     delete dpe.logement.production_elec_enr?.donnee_intermediaire;
+
+    return dpe;
   }
 }

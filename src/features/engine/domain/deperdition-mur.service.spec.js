@@ -353,6 +353,31 @@ describe('Calcul de déperdition des murs', () => {
       expect(di.umur0).toBeCloseTo(0.82983999999999991);
       expect(di.umur).toBeCloseTo(0.26990177584075975);
     });
+
+    test('(2187E0982013C) Mur Nord, Sud, Est, Ouest - Mur en pierre de taille et moellons avec remplissage tout venant d&apos;épaisseur 50 cm non isolé donnant sur l&apos;extérieur', () => {
+      /** @type {Contexte} */
+      const ctx = {
+        effetJoule: false,
+        enumPeriodeConstructionId: '1',
+        zoneClimatiqueId: '3'
+      };
+      /** @type {MurDE} */
+      const de = {
+        enum_type_adjacence_id: '1',
+        enum_materiaux_structure_mur_id: '3',
+        enum_methode_saisie_u_id: '1',
+        enum_methode_saisie_u0_id: '2',
+        enduit_isolant_paroi_ancienne: true,
+        epaisseur_structure: 18,
+        resistance_isolation: 2.5,
+        enum_type_doublage_id: '2',
+        enum_type_isolation_id: '2'
+      };
+
+      const di = DeperditionMurService.process(ctx, de);
+      expect(di.umur0).toBeCloseTo(0.81545);
+      expect(di.umur).toBeCloseTo(0.81545);
+    });
   });
 
   describe("Test d'intégration de mur", () => {
@@ -371,9 +396,6 @@ describe('Calcul de déperdition des murs', () => {
           m.donnee_entree.enduit_isolant_paroi_ancienne = m.donnee_entree.paroi_ancienne;
         }
         const di = DeperditionMurService.process(ctx, m.donnee_entree);
-
-        console.log(ctx);
-        console.log(m);
 
         if (m.donnee_intermediaire.umur0) {
           expect(di.umur0).toBeCloseTo(m.donnee_intermediaire.umur0, 2);

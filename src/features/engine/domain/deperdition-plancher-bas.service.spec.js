@@ -179,10 +179,6 @@ describe('Calcul de déperdition des planchers bas', () => {
       pbs.forEach((pb) => {
         const di = DeperditionPlancherBasService.process(ctx, pb.donnee_entree);
 
-        console.log(ademeId);
-        console.log(ctx);
-        console.log(pb);
-
         if (pb.donnee_intermediaire) {
           expect(di.upb0).toBeCloseTo(pb.donnee_intermediaire.upb0, 2);
         } else {

@@ -5,7 +5,6 @@ import { ContexteBuilder } from './contexte.builder.js';
 import { DpeNormalizerService } from '../../normalizer/domain/dpe-normalizer.service.js';
 import { DeperditionPlancherHautService } from './deperdition-plancher-haut.service.js';
 import corpus from '../../../../test/corpus-sano.json';
-import { DeperditionPlancherBasService } from './deperdition-plancher-bas.service.js';
 
 describe('Calcul de déperdition des planchers haut', () => {
   beforeAll(() => {
@@ -151,6 +150,27 @@ describe('Calcul de déperdition des planchers haut', () => {
       expect(di.uph0).toBeCloseTo(1.25);
       expect(di.uph).toBeCloseTo(0.5);
     });
+
+    test('Test de plancher avec uph0 type de paroi inconnu (valeur par défaut)', () => {
+      /** @type {Contexte} */
+      const ctx = {
+        effetJoule: false,
+        enumPeriodeConstructionId: '6',
+        zoneClimatiqueId: '3'
+      };
+      /** @type {PlancherHautDE} */
+      const de = {
+        enum_type_adjacence_id: '1',
+        enum_type_plancher_haut_id: '1',
+        enum_methode_saisie_u0_id: '1',
+        enum_type_isolation_id: '1',
+        enum_methode_saisie_u_id: '7'
+      };
+
+      const di = DeperditionPlancherHautService.process(ctx, de);
+      expect(di.uph0).toBeCloseTo(2.5);
+      expect(di.uph).toBeCloseTo(0.4);
+    });
   });
 
   describe("Test d'intégration de plancher haut", () => {
@@ -169,10 +189,6 @@ describe('Calcul de déperdition des planchers haut', () => {
 
       phs.forEach((ph) => {
         const di = DeperditionPlancherHautService.process(ctx, ph.donnee_entree);
-
-        console.log(ademeId);
-        console.log(ctx);
-        console.log(ph);
 
         if (ph.donnee_intermediaire) {
           expect(di.uph0).toBeCloseTo(ph.donnee_intermediaire.uph0, 2);

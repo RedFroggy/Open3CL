@@ -15,7 +15,6 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:coverage": "npm run test -- --coverage",
     "test:benchmark": "node inspect test/run_benchmark.js",
-    "qa:test": "eslint .",
     "qa:lint": "eslint .",
     "qa:lint:fix": "npm run qa:lint -- --fix",
     "qa:duplication": "jscpd",
