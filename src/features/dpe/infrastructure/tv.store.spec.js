@@ -373,6 +373,38 @@ describe('Lecture des tables de valeurs', () => {
     });
   });
 
+  describe('lecture des valeurs de uph0', () => {
+    test.each([
+      { enumTypePlancherHautId: '1', expected: 2.5 },
+      { enumTypePlancherHautId: '2', expected: 1.45 },
+      { enumTypePlancherHautId: '3', expected: 1.45 },
+      { enumTypePlancherHautId: '4', expected: 1.2 },
+      { enumTypePlancherHautId: '5', expected: 2.5 },
+      { enumTypePlancherHautId: '6', expected: 2.5 },
+      { enumTypePlancherHautId: '7', expected: 1.2 },
+      { enumTypePlancherHautId: '8', expected: 2.5 },
+      { enumTypePlancherHautId: '9', expected: 2 },
+      { enumTypePlancherHautId: '10', expected: 2.3 },
+      { enumTypePlancherHautId: '11', expected: 2.5 },
+      { enumTypePlancherHautId: '12', expected: 2.5 },
+      { enumTypePlancherHautId: '13', expected: 0.24 },
+      { enumTypePlancherHautId: '14', expected: 2.5 },
+      { enumTypePlancherHautId: '15', expected: undefined },
+      { enumTypePlancherHautId: '16', expected: 2.5 }
+    ])(
+      'uph0 pour type plancher Haut $enumTypePlancherHautId',
+      ({ enumTypePlancherHautId, expected }) => {
+        const uph0 = TvStore.getUph0(enumTypePlancherHautId);
+        expect(uph0).toBe(expected);
+      }
+    );
+
+    test('pas de valeur de uph0', () => {
+      const uph0 = TvStore.getUph0('0');
+      expect(uph0).toBeUndefined();
+    });
+  });
+
   describe('Benchmark b', () => {
     test('reworked', () => {
       for (let i = 0; i < 1000; i++) {

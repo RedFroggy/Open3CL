@@ -40,11 +40,6 @@ export class DpeNormalizerService {
             mur.donnee_entree.epaisseur_structure || epaisseur;
         }
       }
-
-      /*if (!mur.donnee_entree.enduit_isolant_paroi_ancienne) {
-        Log.debug(`Normalisation de la variable 'enduit_isolant_paroi_ancienne' pour le DPE ${normalizedDpe.numero_dpe}, mur ${mur.donnee_entree.description}`);
-        mur.donnee_entree.enduit_isolant_paroi_ancienne = mur.donnee_entree.paroi_ancienne === 1 || false;
-      }*/
     });
   }
 }

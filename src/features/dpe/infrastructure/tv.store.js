@@ -243,4 +243,55 @@ export class TvStore {
     );
     return parseFloat(ue);
   }
+
+  /**
+   * Coefficient de transmission thermique du plancher haut
+   * @param enumTypePlancherHautId {string}
+   * @return {number|undefined}
+   */
+  static getUph0(enumTypePlancherHautId) {
+    const uph0 = tv['uph0'].find((v) =>
+      v.enum_type_plancher_haut_id.split('|').includes(enumTypePlancherHautId)
+    )?.uph0;
+
+    if (!uph0) {
+      Log.error(
+        `Pas de valeur forfaitaire uph0 pour enumTypePlancherHautId:${enumTypePlancherHautId}`
+      );
+      return;
+    }
+
+    Log.debug(`upbO pour enumTypePlancherHautId ${enumTypePlancherHautId} = ${uph0}`);
+    return parseFloat(uph0);
+  }
+
+  /**
+   * Coefficient de transmission thermique du plancher bas
+   * @param enumPeriodeConstructionId {string}
+   * @param typeToiture {('combles'|'terasse')}
+   * @param enumZoneClimatiqueId {string}
+   * @param effetJoule {boolean}
+   * @return {number|undefined}
+   */
+  static getUph(enumPeriodeConstructionId, typeToiture, enumZoneClimatiqueId, effetJoule = false) {
+    const uph = tv['uph'].find(
+      (v) =>
+        v.enum_periode_construction_id.split('|').includes(enumPeriodeConstructionId) &&
+        v.enum_zone_climatique_id.split('|').includes(enumZoneClimatiqueId) &&
+        v.type_toiture === typeToiture &&
+        effetJoule === (parseInt(v.effet_joule) === 1)
+    )?.uph;
+
+    if (!uph) {
+      Log.error(
+        `Pas de valeur forfaitaire uph pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}, typeToiture:${typeToiture}`
+      );
+      return;
+    }
+
+    Log.debug(
+      `uph pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}, typeToiture:${typeToiture} = ${uph}`
+    );
+    return parseFloat(uph);
+  }
 }

@@ -3,6 +3,8 @@ import enums from '../../../enums.js';
 import { Log } from '../../../core/util/logger/log-service.js';
 import { DeperditionMurService } from './deperdition-mur.service.js';
 import { DeperditionPorteService } from './deperdition-porte.service.js';
+import { DeperditionPlancherBasService } from './deperdition-plancher-bas.service.js';
+import { DeperditionPlancherHautService } from './deperdition-plancher-haut.service.js';
 
 /**
  * Calcul des déperditions de l’enveloppe GV
@@ -71,7 +73,7 @@ export class DeperditionService {
       deperdition_renouvellement_air: 0
     };
 
-    enveloppe.mur_collection.mur.forEach((m) => {
+    enveloppe.mur_collection.mur?.forEach((m) => {
       m.donnee_intermediaire = DeperditionMurService.process(ctx, m.donnee_entree);
       deperditions.deperdition_mur +=
         m.donnee_intermediaire.b *
@@ -79,10 +81,26 @@ export class DeperditionService {
         m.donnee_intermediaire.umur;
     });
 
-    enveloppe.porte_collection.porte.forEach((p) => {
+    enveloppe.porte_collection.porte?.forEach((p) => {
       p.donnee_intermediaire = DeperditionPorteService.process(ctx, p.donnee_entree);
       deperditions.deperdition_porte +=
         p.donnee_intermediaire.b * p.donnee_entree.surface_porte * p.donnee_intermediaire.uporte;
+    });
+
+    enveloppe.plancher_bas_collection.plancher_bas?.forEach((pb) => {
+      pb.donnee_intermediaire = DeperditionPlancherBasService.process(ctx, pb.donnee_entree);
+      deperditions.deperdition_plancher_bas +=
+        pb.donnee_intermediaire.b *
+        pb.donnee_entree.surface_paroi_opaque *
+        pb.donnee_intermediaire.upb_final;
+    });
+
+    enveloppe.plancher_haut_collection.plancher_haut?.forEach((ph) => {
+      ph.donnee_intermediaire = DeperditionPlancherHautService.process(ctx, ph.donnee_entree);
+      deperditions.deperdition_plancher_haut +=
+        ph.donnee_intermediaire.b *
+        ph.donnee_entree.surface_paroi_opaque *
+        ph.donnee_intermediaire.uph;
     });
 
     return deperditions;

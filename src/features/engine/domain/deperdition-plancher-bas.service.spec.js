@@ -5,7 +5,6 @@ import { getAdemeFileJson } from '../../../../test/test-helpers.js';
 import { ContexteBuilder } from './contexte.builder.js';
 import { DpeNormalizerService } from '../../normalizer/domain/dpe-normalizer.service.js';
 import { DeperditionPlancherBasService } from './deperdition-plancher-bas.service.js';
-import { DeperditionMurService } from './deperdition-mur.service.js';
 
 describe('Calcul de déperdition des planchers bas', () => {
   beforeAll(() => {
@@ -165,7 +164,6 @@ describe('Calcul de déperdition des planchers bas', () => {
 
   describe("Test d'intégration de plancher bas", () => {
     test.each(corpus)('vérification des DI des pb pour dpe %s', (ademeId) => {
-      let e = false;
       /**
        * @type {Dpe}
        */
@@ -178,26 +176,22 @@ describe('Calcul de déperdition des planchers bas', () => {
       /** @type {PlancherBas[]} */
       const pbs = dpeRequest.logement.enveloppe.plancher_bas_collection?.plancher_bas || [];
 
-      pbs
-        .filter((pb) => parseInt(pb.donnee_entree.calcul_ue) !== 1)
-        .forEach((pb) => {
-          const di = DeperditionPlancherBasService.process(ctx, pb.donnee_entree);
+      pbs.forEach((pb) => {
+        const di = DeperditionPlancherBasService.process(ctx, pb.donnee_entree);
 
-          console.log(ademeId);
-          console.log(ctx);
-          console.log(pb);
+        console.log(ademeId);
+        console.log(ctx);
+        console.log(pb);
 
-          if (pb.donnee_intermediaire) {
-            expect(di.upb0).toBeCloseTo(pb.donnee_intermediaire.upb0, 2);
-          } else {
-            expect(di.upb0).toBeUndefined();
-          }
-          expect(di.upb).toBeCloseTo(pb.donnee_intermediaire.upb, 2);
-          expect(di.upb_final).toBeCloseTo(pb.donnee_intermediaire.upb_final, 2);
-          expect(di.b).toBeCloseTo(pb.donnee_intermediaire.b, 2);
-        });
-
-      expect(e).toBeFalsy();
+        if (pb.donnee_intermediaire) {
+          expect(di.upb0).toBeCloseTo(pb.donnee_intermediaire.upb0, 2);
+        } else {
+          expect(di.upb0).toBeUndefined();
+        }
+        expect(di.upb).toBeCloseTo(pb.donnee_intermediaire.upb, 2);
+        expect(di.upb_final).toBeCloseTo(pb.donnee_intermediaire.upb_final, 2);
+        expect(di.b).toBeCloseTo(pb.donnee_intermediaire.b, 2);
+      });
     });
   });
 });

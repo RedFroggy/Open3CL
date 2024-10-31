@@ -357,7 +357,6 @@ describe('Calcul de déperdition des murs', () => {
 
   describe("Test d'intégration de mur", () => {
     test.each(corpus)('vérification des DI des murs pour dpe %s', (ademeId) => {
-      let e = false;
       let dpeRequest = getAdemeFileJson(ademeId);
       dpeRequest = DpeNormalizerService.normalize(dpeRequest);
 
@@ -384,8 +383,6 @@ describe('Calcul de déperdition des murs', () => {
         expect(di.umur).toBeCloseTo(m.donnee_intermediaire.umur, 2);
         expect(di.b).toBeCloseTo(m.donnee_intermediaire.b, 2);
       });
-
-      expect(e).toBeFalsy();
     });
   });
 });

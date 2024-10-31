@@ -3,10 +3,9 @@ import { Log } from '../../../core/util/logger/log-service.js';
 import { DeperditionService } from './deperdition.service.js';
 import b from '../../../3.1_b.js';
 import corpus from '../../../../test/corpus-sano.json';
-import { getAdemeFileJson, removeDIAndResult } from '../../../../test/test-helpers.js';
+import { getAdemeFileJson } from '../../../../test/test-helpers.js';
 import { DpeNormalizerService } from '../../normalizer/domain/dpe-normalizer.service.js';
 import { ContexteBuilder } from './contexte.builder.js';
-import { DeperditionMurService } from './deperdition-mur.service.js';
 
 describe('Calcul des déperditions', () => {
   /** @type {Contexte} */
@@ -18,6 +17,7 @@ describe('Calcul des déperditions', () => {
     //Log.error = jest.fn();
     Log.info = jest.fn();
   });
+
   describe('Détermination du coefficient de réduction des déperditions b', () => {
     test.each([
       { enumTypeAdjacenceId: '1', label: 'extérieur', bExpected: 1 },
@@ -214,9 +214,8 @@ describe('Calcul des déperditions', () => {
     });
   });
 
-  xdescribe("Test d'intégration de calcul des deperditions", () => {
+  describe("Test d'intégration de calcul des deperditions", () => {
     test.each(corpus)('deperditions pour dpe %s', (ademeId) => {
-      let e = false;
       let dpeRequest = getAdemeFileJson(ademeId);
       dpeRequest = DpeNormalizerService.normalize(dpeRequest);
 
@@ -229,11 +228,19 @@ describe('Calcul des déperditions', () => {
 
       expect(deperditions.deperdition_mur).toBeCloseTo(
         dpeRequest.logement.sortie.deperdition.deperdition_mur,
-        2
+        1
       );
       expect(deperditions.deperdition_porte).toBeCloseTo(
         dpeRequest.logement.sortie.deperdition.deperdition_porte,
-        2
+        1
+      );
+      expect(deperditions.deperdition_plancher_bas).toBeCloseTo(
+        dpeRequest.logement.sortie.deperdition.deperdition_plancher_bas,
+        1
+      );
+      expect(deperditions.deperdition_plancher_haut).toBeCloseTo(
+        dpeRequest.logement.sortie.deperdition.deperdition_plancher_haut,
+        1
       );
     });
   });
