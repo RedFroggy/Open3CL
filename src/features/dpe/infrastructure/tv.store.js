@@ -268,7 +268,7 @@ export class TvStore {
   /**
    * Coefficient de transmission thermique du plancher bas
    * @param enumPeriodeConstructionId {string}
-   * @param typeToiture {('combles'|'terasse')}
+   * @param typeToiture {('combles'|'terrasse')}
    * @param enumZoneClimatiqueId {string}
    * @param effetJoule {boolean}
    * @return {number|undefined}
@@ -293,5 +293,44 @@ export class TvStore {
       `uph pour enumPeriodeConstructionId:${enumPeriodeConstructionId}, enumPeriodeConstructionId:${enumPeriodeConstructionId}, typeToiture:${typeToiture} = ${uph}`
     );
     return parseFloat(uph);
+  }
+
+  /**
+   * Coefficient de transmission thermique du plancher bas
+   * @param enumTypeVitrageId {string}
+   * @param enumTypeGazLameId {string|undefined}
+   * @param enumInclinaisonVitrageId {string|undefined}
+   * @param vitrageVir {boolean|undefined}
+   * @param epaisseurLame {number|undefined}
+   * @return {number|undefined}
+   */
+  static getUg(
+    enumTypeVitrageId,
+    enumTypeGazLameId,
+    enumInclinaisonVitrageId,
+    vitrageVir,
+    epaisseurLame
+  ) {
+    const ug = tv['ug'].find(
+      (v) =>
+        v.enum_type_vitrage_id.split('|').includes(enumTypeVitrageId) &&
+        (!enumInclinaisonVitrageId ||
+          v.enum_inclinaison_vitrage_id.split('|').includes(enumInclinaisonVitrageId)) &&
+        (!enumTypeGazLameId || v.enum_type_gaz_lame_id.split('|').includes(enumTypeGazLameId)) &&
+        (!epaisseurLame || parseFloat(v.epaisseur_lame) === epaisseurLame) &&
+        (!vitrageVir || vitrageVir === (parseInt(v.vitrage_vir) === 1))
+    )?.ug;
+
+    if (!ug) {
+      Log.error(
+        `Pas de valeur forfaitaire ug pour enumTypeVitrageId:${enumTypeVitrageId}, enumTypeGazLameId:${enumTypeGazLameId}, enumInclinaisonVitrageId:${enumInclinaisonVitrageId}, vitrageVir:${vitrageVir}, epaisseurLame:${epaisseurLame}`
+      );
+      return;
+    }
+
+    Log.debug(
+      `ug pour enumTypeVitrageId:${enumTypeVitrageId}, enumTypeGazLameId:${enumTypeGazLameId}, enumInclinaisonVitrageId:${enumInclinaisonVitrageId}, vitrageVir:${vitrageVir}, epaisseurLame:${epaisseurLame} = ${ug}`
+    );
+    return parseFloat(ug);
   }
 }
