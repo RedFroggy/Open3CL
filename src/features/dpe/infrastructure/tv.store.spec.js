@@ -488,6 +488,15 @@ describe('Lecture des tables de valeurs', () => {
         enumInclinaisonVitrageId: '4',
         vitrageVir: false,
         expected: 2.9
+      },
+      {
+        label: "Double vitrage horizontal non traité avec lame d'air inconnu 11mm",
+        enumTypeVitrageId: '2',
+        epaisseurLame: 11,
+        enumTypeGazLameId: '3',
+        enumInclinaisonVitrageId: '4',
+        vitrageVir: false,
+        expected: 3.2
       }
     ])(
       `ug pour baie vitrée $label`,
